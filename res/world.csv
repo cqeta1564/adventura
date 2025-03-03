@@ -1,10 +1,10 @@
-škola,chodba,za školou
-za školou,škola
-chodba,kmenová učebna,fyzikální učebna,počítačová učebna,dílny,aula,ředitelna,záchody
-kmenová učebna,chodba
-fyzikální učebna,chodba
-počítačová učebna,chodba
-dílny,chodba
-aula,chodba
-ředitelna,chodba
-záchody,chodba
+venku,skola, za skolou
+za skolou, venku
+chodba, kmenova ucebna, fyzikalni ucebna, pocitacova ucebna, dilny, aula, reditelna, zachody, venku
+kmenova ucebna, chodba
+fyzikalni ucebna, chodba
+pocitacova ucebna, chodba
+dilny, chodba
+aula, chodba
+reditelna, chodba
+zachody, chodba
