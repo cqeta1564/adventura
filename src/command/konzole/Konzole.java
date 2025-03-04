@@ -1,16 +1,29 @@
 package command.konzole;
 
 import command.*;
+import singleton.Mistnost;
+import singleton.Svet;
+import singleton.SvetLoader;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Třída zpracovávající vstup uživatele a provádějící příkazy.
+ */
 public class Konzole {
     private Scanner sc = new Scanner(System.in);
     private boolean exit = false;
     private HashMap<String, Command> mapa;
     public static String souborPrikazu = "souborPrikazu.txt";
+
+    //Zacatek testovaciho kodu pro ovladani sveta ----------------------------------------
+    Svet svet;
+    Mistnost currentMistnost;
+    //Konec testovaciho kodu pro ovladani sveta ------------------------------------------
 
     private void inicializace() {
         mapa = new HashMap<>();
@@ -25,8 +38,18 @@ public class Konzole {
         mapa.put("progress", new Progress());
     }
 
+    /**
+     * Spustí konzoli a čeká na vstup uživatele.
+     */
     public void start() {
         inicializace();
+
+        //Zacatek testovaciho kodu pro ovladani sveta ----------------------------------------
+        SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
+        svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
+        currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
+        //Konec testovaciho kodu pro ovladani sveta ------------------------------------------
+
         try {
             resetSouboruProPrikazy();
             do {
@@ -40,11 +63,14 @@ public class Konzole {
     private void provedPrikaz() {
         System.out.print(">");
         String prikaz = sc.nextLine();
-        prikaz = prikaz.trim();
-        prikaz = prikaz.toLowerCase();
+        prikaz = prikaz.trim(); //Remove leading and trailing whitespaces
+        prikaz = prikaz.toLowerCase(); //Convert to lowercase
+        prikaz = Normalizer.normalize(prikaz, Normalizer.Form.NFD); //Remove diacritics
+        prikaz = prikaz.replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); //Remove diacritics
         ulozPrikaz(prikaz);
         if (mapa.containsKey(prikaz)) {
             System.out.println("> " + mapa.get(prikaz).execute());
+            System.out.println("> " + mapa.get(prikaz).move(currentMistnost));
             exit = mapa.get(prikaz).exit();
         } else {
             System.out.println("> Nedefinovany prikaz");
