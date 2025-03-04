@@ -1,7 +1,13 @@
-import java.util.Scanner;
+import command.konzole.Konzole;
+import singleton.Svet;
+import singleton.SvetLoader;
 
+/**
+ * Hlavní třída programu, která spouští hru.
+ */
 public class Main {
     public static void main(String[] args) {
-        Hra hra = new Hra();
+        Konzole konzole = new Konzole();
+        konzole.start();
     }
 }
