@@ -1,5 +1,10 @@
 package command;
 
+import singleton.Mistnost;
+
+/**
+ * Příkaz zobrazující dostupné příkazy ve hře.
+ */
 public class Pomoc extends Command {
     @Override
     public String execute() {
@@ -15,6 +20,11 @@ public class Pomoc extends Command {
                 prodat <množství/předmět> - prodá kontrabant nebo ukradené vybavení
                 progress - zobrazí postup ve hře
                 """;
+    }
+
+    @Override
+    public String move(Mistnost currentMistnost) {
+        return "";
     }
 
     @Override
