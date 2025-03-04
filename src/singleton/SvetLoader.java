@@ -1,8 +1,17 @@
+package singleton;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Načítá svět hry z CSV souboru.
+ */
 public class SvetLoader {
+
+    /**
+     * Načte svět hry z CSV souboru res/world.csv.
+     */
     public static void loadWorld() {
         Svet svet = Svet.getInstance();
 
