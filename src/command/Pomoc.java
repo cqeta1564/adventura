@@ -23,8 +23,8 @@ public class Pomoc extends Command {
     }
 
     @Override
-    public String move(Mistnost currentMistnost) {
-        return "";
+    public Mistnost move(Mistnost currentMistnost, String nextMistnostName) {
+        return currentMistnost;
     }
 
     @Override

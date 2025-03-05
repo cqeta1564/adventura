@@ -50,11 +50,11 @@ public class Konzole {
         currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
         //Konec testovaciho kodu pro ovladani sveta ------------------------------------------
 
-        try {
+        try { //Projistotu try-catch, ale nemel by byt za potrebi
             resetSouboruProPrikazy();
-            do {
+            while (!exit) {
                 provedPrikaz();
-            } while (!exit);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -68,10 +68,18 @@ public class Konzole {
         prikaz = Normalizer.normalize(prikaz, Normalizer.Form.NFD); //Remove diacritics
         prikaz = prikaz.replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); //Remove diacritics
         ulozPrikaz(prikaz);
-        if (mapa.containsKey(prikaz)) {
-            System.out.println("> " + mapa.get(prikaz).execute());
-            System.out.println("> " + mapa.get(prikaz).move(currentMistnost));
-            exit = mapa.get(prikaz).exit();
+        String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
+        if (mapa.containsKey(slova[0])) {
+            System.out.println("> " + mapa.get(slova[0]).execute()); //Resime bezne prikazy
+            if (slova[0].equals("jdi")) { //Resime prikaz pohybu
+                try {
+                    currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]); //TODO: Extrahovat z prikazu mistnost
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("> Spatne zadany prikaz");
+                }
+            }
+            exit = mapa.get(slova[0]).exit(); //Resime prikaz ukonceni
         } else {
             System.out.println("> Nedefinovany prikaz");
         }
@@ -82,13 +90,14 @@ public class Konzole {
             bw.write(prikaz);
             bw.newLine();
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
     private void resetSouboruProPrikazy() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(souborPrikazu, false))) {
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

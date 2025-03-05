@@ -12,7 +12,8 @@ public abstract class Command {
      */
     public abstract String execute();
 
-    public abstract String move(Mistnost currentMistnost);
+    //TODO: Dopsat JavaDocs
+    public abstract Mistnost move(Mistnost currentMistnost, String nextMistnostName);
 
     /**
      * Určuje, zda příkaz ukončuje hru.
