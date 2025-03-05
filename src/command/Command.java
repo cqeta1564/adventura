@@ -12,7 +12,12 @@ public abstract class Command {
      */
     public abstract String execute();
 
-    //TODO: Dopsat JavaDocs
+    /**
+     * Přesune hráče do jiné místnosti.
+     * @param currentMistnost Aktuální místnost hráče
+     * @param nextMistnostName Název místnosti, do které se hráč chce přesunout
+     * @return Nová místnost, pokud přesun proběhne úspěšně, jinak původní místnost
+     */
     public abstract Mistnost move(Mistnost currentMistnost, String nextMistnostName);
 
     /**

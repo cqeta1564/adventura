@@ -73,7 +73,7 @@ public class Konzole {
             System.out.println("> " + mapa.get(slova[0]).execute()); //Resime bezne prikazy
             if (slova[0].equals("jdi")) { //Resime prikaz pohybu
                 try {
-                    currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]); //TODO: Extrahovat z prikazu mistnost
+                    currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     System.out.println("> Spatne zadany prikaz");
