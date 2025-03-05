@@ -18,7 +18,7 @@ public class Konzole {
     private Scanner sc = new Scanner(System.in);
     private boolean exit = false;
     private HashMap<String, Command> mapa;
-    public static String souborPrikazu = "souborPrikazu.txt";
+    public static String souborPrikazu = "res/historiePrikazu.txt";
 
     //Zacatek testovaciho kodu pro ovladani sveta ----------------------------------------
     Svet svet;
