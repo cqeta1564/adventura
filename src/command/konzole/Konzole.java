@@ -1,7 +1,9 @@
 package command.konzole;
 
 import command.*;
+import observer.Observable;
 import singleton.Mistnost;
+import singleton.Satnar;
 import singleton.Svet;
 import singleton.SvetLoader;
 
@@ -20,10 +22,8 @@ public class Konzole {
     private HashMap<String, Command> mapa;
     public static String souborPrikazu = "res/historiePrikazu.txt";
 
-    //Zacatek testovaciho kodu pro ovladani sveta ----------------------------------------
-    Svet svet;
-    Mistnost currentMistnost;
-    //Konec testovaciho kodu pro ovladani sveta ------------------------------------------
+    private Svet svet;
+    private Mistnost currentMistnost;
 
     private void inicializace() {
         mapa = new HashMap<>();
@@ -44,11 +44,17 @@ public class Konzole {
     public void start() {
         inicializace();
 
-        //Zacatek testovaciho kodu pro ovladani sveta ----------------------------------------
+        //Zacatek kodu pro ovladani sveta ----------------------------------------
         SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
         svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
         currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
-        //Konec testovaciho kodu pro ovladani sveta ------------------------------------------
+        //Konec kodu pro ovladani sveta ------------------------------------------
+
+        //Zacatek testovaciho kodu pro satnare -----------------------------------
+        Observable observable = new Observable();
+        Satnar satnar = new Satnar();
+        observable.addObserver(satnar);
+        //Konec testovaciho kodu pro satnare -------------------------------------
 
         try { //Projistotu try-catch, ale nemel by byt za potrebi
             resetSouboruProPrikazy();
