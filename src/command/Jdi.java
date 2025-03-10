@@ -5,7 +5,7 @@ import singleton.Mistnost;
 public class Jdi extends Command {
     @Override
     public String execute() {
-        return "provadim prikaz jdi... volam metodu move()";
+        return "";
     }
 
     @Override
