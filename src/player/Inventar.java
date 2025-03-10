@@ -17,7 +17,12 @@ public class Inventar {
 
     public void showItems() {
         for (Item item : items) {
-            System.out.println(item.getName() + " - " + item.getPrice() + " Kč");
+            System.out.println(item.getNazev() + " - " + item.getCena() + " Kč");
         }
+    }
+
+    //TODO: Dopsat metodu pro kontrolu kontrabandu v inventari a jeho nasledne mazani, popripade prida quest na navstevu reditelny
+    public void zkontrolovatInventar() {
+
     }
 }
