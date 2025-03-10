@@ -1,21 +1,21 @@
 package item;
 
 public class Kontraband implements Item {
-    private String name;
-    private int price;
+    private String nazev;
+    private int cena;
 
-    public Kontraband(String name, int price) {
-        this.name = name;
-        this.price = price;
+    public Kontraband(String nazev, int cena) {
+        this.nazev = nazev;
+        this.cena = cena;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getNazev() {
+        return nazev;
     }
 
     @Override
-    public int getPrice() {
-        return price;
+    public int getCena() {
+        return cena;
     }
 }
