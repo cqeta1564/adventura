@@ -1,11 +1,8 @@
 package command.konzole;
 
 import command.*;
-import observer.Observable;
-import singleton.Mistnost;
-import singleton.Satnar;
-import singleton.Svet;
-import singleton.SvetLoader;
+import observer.*;
+import singleton.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

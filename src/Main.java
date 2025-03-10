@@ -1,6 +1,4 @@
 import command.konzole.Konzole;
-import singleton.Svet;
-import singleton.SvetLoader;
 
 /**
  * Hlavní třída programu, která spouští hru.

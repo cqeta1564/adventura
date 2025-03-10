@@ -1,4 +1,5 @@
 package command;
+
 import singleton.Mistnost;
 
 public class Jdi extends Command {
