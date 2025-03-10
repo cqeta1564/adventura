@@ -7,9 +7,24 @@ public class Satnar implements Observer {
 
     @Override
     public void update(String event) {
-        if (event.equals("kradez")) {
-            podezreni = true;
-            System.out.println("Šatnář: Vidím, že tu někdo krade!");
+        switch (event) {
+            case "nahodnaProhlidka":
+                if (podezreni) {
+                    inventar.zkontrolovatInventar(); //TODO: Opravit parsovani teto metody
+                } else {
+                    System.out.println("Šatnář: Hej! Co to tam máš.");
+                }
+
+            case "neprezuto":
+                podezreni = true;
+                break;
+
+            case "prezuto":
+                podezreni = false;
+                break;
+
+            default:
+                break;
         }
     }
 

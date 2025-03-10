@@ -10,6 +10,7 @@ public class Observable {
         observers.add(observer);
     }
 
+    //TODO: Propojit tuto metodu s pruchodem pres mistnost "chodba" a pridat nahodne sance na kontrolu
     public void notifyObservers(String event) {
         for (Observer observer : observers) {
             observer.update(event);
