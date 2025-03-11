@@ -73,14 +73,13 @@ public class Konzole {
         ulozPrikaz(prikaz);
         String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
         if (mapa.containsKey(slova[0])) {
-            System.out.println("> " + mapa.get(slova[0]).execute()); //Resime bezne prikazy
-            if (slova[0].equals("jdi")) { //Resime prikaz pohybu
-                try {
-                    currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    System.out.println("> Spatne zadany prikaz");
-                }
+            System.out.print("> ");
+            System.out.print(mapa.get(slova[0]).execute());
+            try {
+                currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]);
+            } catch (Exception e) {
+                System.out.println();
+                System.out.println("> Chybne zadany prikaz");
             }
             exit = mapa.get(slova[0]).exit(); //Resime prikaz ukonceni
         } else {

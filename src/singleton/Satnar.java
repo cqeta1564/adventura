@@ -10,7 +10,7 @@ public class Satnar implements Observer {
         switch (event) {
             case "nahodnaProhlidka":
                 if (podezreni) {
-                    inventar.zkontrolovatInventar(); //TODO: Opravit parsovani teto metody
+                    //inventar.zkontrolovatInventar(); //TODO: Opravit parsovani teto metody
                 } else {
                     System.out.println("Šatnář: Hej! Co to tam máš.");
                 }
