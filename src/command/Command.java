@@ -3,6 +3,8 @@ package command;
 import player.Hrac;
 import singleton.Mistnost;
 
+import java.util.Scanner;
+
 /**
  * Abstraktní třída představující příkaz ve hře.
  */
@@ -12,7 +14,7 @@ public abstract class Command {
      * Spustí příkaz.
      * @return Výstup příkazu
      */
-    public abstract String execute(Hrac hrac, Mistnost currentMistnost);
+    public abstract String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner);
 
     /**
      * Přesune hráče do jiné místnosti.

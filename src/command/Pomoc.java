@@ -3,12 +3,14 @@ package command;
 import player.Hrac;
 import singleton.Mistnost;
 
+import java.util.Scanner;
+
 /**
  * Příkaz zobrazující dostupné příkazy ve hře.
  */
 public class Pomoc extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner) {
         return """
                 Dostupné příkazy:
                 jdi <místnost> - přesune hráče do zadané místnosti

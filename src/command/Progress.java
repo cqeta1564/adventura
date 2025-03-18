@@ -3,9 +3,11 @@ package command;
 import player.Hrac;
 import singleton.Mistnost;
 
+import java.util.Scanner;
+
 public class Progress extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner) {
         return "Tato ficura bude pridana az se programator bude nudit. Tato sïtuace zatim nenastala.";
     }
 
