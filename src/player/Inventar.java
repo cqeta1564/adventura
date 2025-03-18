@@ -16,10 +16,20 @@ public class Inventar {
         items.remove(item);
     }
 
-    public void showItems() {
+    public Item getItem(int index){
+        return items.get(index);
+    }
+
+    public String showItems() {
+        StringBuilder sb = new StringBuilder();
         for (Item item : items) {
-            System.out.println(item.getNazev() + " - " + item.getCena() + " Kč");
+            sb.append(item.getNazev()).append(" - ").append(item.getCena()).append(" Kč");
         }
+        return sb.toString();
+    }
+
+    public int getSize(){
+        return items.size();
     }
 
     //TODO: Dopsat metodu pro kontrolu kontrabandu v inventari a jeho nasledne mazani, popripade prida quest na navstevu reditelny
@@ -31,7 +41,7 @@ public class Inventar {
         return penize;
     }
 
-    public void setPenize(int penize) {
+    public void addPenize(int penize) {
         this.penize = penize;
     }
 }
