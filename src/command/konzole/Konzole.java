@@ -79,7 +79,7 @@ public class Konzole {
         String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
         if (mapa.containsKey(slova[0])) {
             System.out.print("> ");
-            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost));
+            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost, this.sc));
             try {
                 currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]);
             } catch (Exception e) {
