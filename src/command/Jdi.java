@@ -1,10 +1,11 @@
 package command;
 
+import player.Hrac;
 import singleton.Mistnost;
 
 public class Jdi extends Command {
     @Override
-    public String execute() {
+    public String execute(Hrac hrac, Mistnost currentMistnost) {
         return "";
     }
 

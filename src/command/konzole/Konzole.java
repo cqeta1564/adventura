@@ -3,6 +3,7 @@ package command.konzole;
 import command.*;
 import observer.*;
 import singleton.*;
+import player.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -21,6 +22,8 @@ public class Konzole {
 
     private Svet svet;
     private Mistnost currentMistnost;
+
+    public Hrac hrac;
 
     private void inicializace() {
         mapa = new HashMap<>();
@@ -53,6 +56,8 @@ public class Konzole {
         observable.addObserver(satnar);
         //Konec testovaciho kodu pro satnare -------------------------------------
 
+        this.hrac = new Hrac();
+
         try { //Projistotu try-catch, ale nemel by byt za potrebi
             resetSouboruProPrikazy();
             while (!exit) {
@@ -74,7 +79,7 @@ public class Konzole {
         String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
         if (mapa.containsKey(slova[0])) {
             System.out.print("> ");
-            System.out.print(mapa.get(slova[0]).execute());
+            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost));
             try {
                 currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]);
             } catch (Exception e) {

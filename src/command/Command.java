@@ -1,5 +1,6 @@
 package command;
 
+import player.Hrac;
 import singleton.Mistnost;
 
 /**
@@ -11,7 +12,7 @@ public abstract class Command {
      * Spustí příkaz.
      * @return Výstup příkazu
      */
-    public abstract String execute();
+    public abstract String execute(Hrac hrac, Mistnost currentMistnost);
 
     /**
      * Přesune hráče do jiné místnosti.

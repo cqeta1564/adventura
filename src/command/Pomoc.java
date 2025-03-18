@@ -1,5 +1,6 @@
 package command;
 
+import player.Hrac;
 import singleton.Mistnost;
 
 /**
@@ -7,7 +8,7 @@ import singleton.Mistnost;
  */
 public class Pomoc extends Command {
     @Override
-    public String execute() {
+    public String execute(Hrac hrac, Mistnost currentMistnost) {
         return """
                 Dostupné příkazy:
                 jdi <místnost> - přesune hráče do zadané místnosti
