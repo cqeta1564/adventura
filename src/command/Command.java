@@ -1,5 +1,6 @@
 package command;
 
+import observer.Observable;
 import player.Hrac;
 import singleton.Mistnost;
 
@@ -14,7 +15,7 @@ public abstract class Command {
      * Spustí příkaz.
      * @return Výstup příkazu
      */
-    public abstract String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner);
+    public abstract String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable);
 
     /**
      * Přesune hráče do jiné místnosti.
@@ -22,7 +23,7 @@ public abstract class Command {
      * @param nextMistnostName Název místnosti, do které se hráč chce přesunout
      * @return Nová místnost, pokud přesun proběhne úspěšně, jinak původní místnost
      */
-    public abstract Mistnost move(Mistnost currentMistnost, String nextMistnostName);
+    public abstract Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable);
 
     /**
      * Určuje, zda příkaz ukončuje hru.

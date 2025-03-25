@@ -1,6 +1,12 @@
 package item;
 
+import command.Command;
+
+import java.util.HashMap;
+
 public class ItemFactory {
+
+    private HashMap<String, Command> mapa; //TODO: Vlozit vsechy kontrabandy a kradene zbozi.
     public static Item createItem(String type) {
         switch (type) {
             case "cigarety":

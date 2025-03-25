@@ -1,18 +1,20 @@
 package command;
 
+import observer.Observable;
 import player.Hrac;
 import singleton.Mistnost;
 
 import java.util.Scanner;
 
+//TODO: Nebude mozna ani za potrebi. Command tu byl z duvodu satnare, ktery si nas stejne hlida a pokud si neceho vsimne vtahne nas do nuceneho rozhovoru, kde neni potreba specifikovat prikaz mluv a v pripade questu reditele se dialog automaticky spusti pri vstupu do reditelny.
 public class Progress extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner) {
-        return "Tato ficura bude pridana az se programator bude nudit. Tato sïtuace zatim nenastala.";
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
+        return "";
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName) {
+    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
         return currentMistnost;
     }
 

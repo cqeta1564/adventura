@@ -12,7 +12,7 @@ public class Satnar implements Observer {
                 if (podezreni) {
                     //inventar.zkontrolovatInventar(); //TODO: Opravit parsovani teto metody
                 } else {
-                    System.out.println("Šatnář: Hej! Co to tam máš.");
+                    System.out.println("Šatnář: Hej! Co to tam máš. Zmiz mi z očí.");
                 }
 
             case "neprezuto":

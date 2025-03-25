@@ -19,11 +19,10 @@ public class Konzole {
     private boolean exit = false;
     private HashMap<String, Command> mapa;
     public static String souborPrikazu = "res/historiePrikazu.txt";
-
     private Svet svet;
     private Mistnost currentMistnost;
-
     public Hrac hrac;
+    private Observable observable;
 
     private void inicializace() {
         mapa = new HashMap<>();
@@ -46,14 +45,13 @@ public class Konzole {
 
         //Zacatek kodu pro ovladani sveta ----------------------------------------
         SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
-        svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
-        currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
+        this.svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
+        this.currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
         //Konec kodu pro ovladani sveta ------------------------------------------
 
         //Zacatek testovaciho kodu pro satnare -----------------------------------
-        Observable observable = new Observable();
-        Satnar satnar = new Satnar();
-        observable.addObserver(satnar);
+        this.observable = new Observable();
+        this.observable.addObserver(new Satnar());
         //Konec testovaciho kodu pro satnare -------------------------------------
 
         this.hrac = new Hrac();
@@ -79,9 +77,9 @@ public class Konzole {
         String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
         if (mapa.containsKey(slova[0])) {
             System.out.print("> ");
-            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost, this.sc));
+            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost, this.sc, this.observable));
             try {
-                currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1]);
+                currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1], this.observable);
             } catch (Exception e) {
                 System.out.println();
                 System.out.println("> Chybne zadany prikaz");

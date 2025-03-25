@@ -1,5 +1,6 @@
 package command;
 
+import observer.Observable;
 import player.Hrac;
 import singleton.Mistnost;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
  */
 public class Pomoc extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
         return """
                 Dostupné příkazy:
                 jdi <místnost> - přesune hráče do zadané místnosti
@@ -26,7 +27,7 @@ public class Pomoc extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName) {
+    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
         return currentMistnost;
     }
 

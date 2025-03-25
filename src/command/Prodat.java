@@ -2,13 +2,14 @@ package command;
 
 import item.Item;
 import item.ItemFactory;
+import observer.Observable;
 import player.Hrac;
 import singleton.Mistnost;
 import java.util.Scanner;
 
 public class Prodat extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
         ItemFactory itemFactory = new ItemFactory();
 
         System.out.println("Co chcete prodat?");
@@ -26,7 +27,7 @@ public class Prodat extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName) {
+    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
         return currentMistnost;
     }
 
