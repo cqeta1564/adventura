@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Progress extends Command {
     @Override
     public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
-        return "";
+        return "Máte " + hrac.getInventar().getPenize() + " peněz";
     }
 
     @Override
