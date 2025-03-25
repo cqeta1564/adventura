@@ -1,35 +1,37 @@
 package command;
 
+
 import item.Item;
 import item.ItemFactory;
 import observer.Observable;
 import singleton.Mistnost;
 import player.*;
+
 import java.util.Scanner;
 
 public class Koupit extends Command {
     @Override
     public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
-        ItemFactory itemFactory = new ItemFactory();
 
-        System.out.println("Co chcete koupit?");
-        String itemName = scanner.nextLine();
-        Item item = itemFactory.createItem(itemName);
-        if(item == null){
-            System.out.println("Takový předmět neexistuje");
-            return "";
+        Item item = ItemFactory.createItem("kontraband");
+
+        if (!(currentMistnost.getName().equals("za skolou"))) {
+            return "Tady nemůžete nakupovat";
         }
 
-        System.out.println("Kolik chcete koupit?");
+        System.out.println("Kolik chcete koupit kontrabandu?");
+
         int pocet = scanner.nextInt();
-        if(pocet*item.getCena() > hrac.getInventar().getPenize()){
-            System.out.println("Nemáte dostatek peněz");
-            return "";
+        if (pocet * item.getCena() > hrac.getInventar().getPenize()) {
+            return "Nemáte dostatek peněz";
         }
+
         for (int i = 0; i < pocet; i++) {
             hrac.getInventar().addItem(item);
         }
+
         return "Koupili jste " + pocet + "x " + item.getNazev();
+
     }
 
     @Override
