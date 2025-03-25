@@ -5,25 +5,65 @@ import item.ItemFactory;
 import observer.Observable;
 import player.Hrac;
 import singleton.Mistnost;
+
 import java.util.Scanner;
 
 public class Prodat extends Command {
     @Override
     public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
-        ItemFactory itemFactory = new ItemFactory();
+        int pocet = 0;
+        switch (currentMistnost.getName()) {
+            case "za skolou":
+                System.out.println("Co chcete prodat?");
+                System.out.println(hrac.getInventar().showItems());
 
-        System.out.println("Co chcete prodat?");
-        System.out.println(hrac.getInventar().showItems());
-        String itemName = scanner.nextLine();
+                String itemName = scanner.nextLine();
 
-        for (int i = 0; i < hrac.getInventar().getSize(); i++) {
-            if(hrac.getInventar().getItem(i).getNazev().equals(itemName)){
-                hrac.getInventar().addPenize(hrac.getInventar().getItem(i).getCena());
-                hrac.getInventar().removeItem(hrac.getInventar().getItem(i));
-                return "Prodali jste " + itemName;
-            }
+                if (!(itemName.equals("kontraband") || itemName.equals("promitacka") || itemName.equals("monitor") || itemName.equals("pocitac"))) {
+                    return "Byl vybrán neznámý item";
+                }
+
+                System.out.println("Kolik chcete prodat?");
+                System.out.println(hrac.getInventar().showItems());
+
+                try {
+                    pocet = scanner.nextInt();
+                } catch (Exception e) {
+                    return "Vyskytla se chyba";
+                }
+
+                if (pocet <= 0 || pocet > hrac.getInventar().pocetItemu(itemName)) {
+                    return "Počet je mimo rozsah";
+                }
+
+                hrac.getInventar().removeItem("kontraband", pocet);
+                return "Prodal jsi " + pocet + "x " + itemName;
+
+            case "zachody":
+                if (hrac.getInventar().pocetItemu("kontraband") == 0) {
+                    return "Nevlastníš žádný kontraband, nelze žádný prodat";
+                }
+
+                System.out.println("Kolik chcete prodat kontrabandu? (vlastníš" + hrac.getInventar().pocetItemu("kontraband") + ")");
+
+                try {
+                    pocet = scanner.nextInt();
+                } catch (Exception e) {
+                    return "Vyskytla se chyba";
+                }
+
+                if (pocet <= 0 || pocet > hrac.getInventar().pocetItemu("kontraband")) {
+                    return "Počet je mimo rozsah";
+                }
+
+                hrac.getInventar().removeItem("kontraband", pocet);
+                return "Prodal jsi " + pocet + "x kontraband";
+
+            default:
+                return "Nejsi v místnosti, kde můžes prodávat.";
         }
-        return "Item nenalezen";
+
+        return "Tohle nikdy neuvidíš :)";
     }
 
     @Override
