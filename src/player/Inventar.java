@@ -55,8 +55,11 @@ public class Inventar {
     //TODO: Dopsat metodu pro kontrolu kontrabandu v inventari a jeho nasledne mazani, popripade prida quest na navstevu reditelny
     public boolean zkontrolovatInventar() {
         System.out.println("Probíhá kontrola inventáře...");
+        if (!this.items.isEmpty()){
+            this.items.subList(1, this.items.size() + 1).clear(); //vygenerovano z Idea, nevim jak to funguje
+            return true;
+        }
         return false;
-
     }
 
     public int getPenize() {
