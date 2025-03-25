@@ -23,7 +23,7 @@ public class Koupit extends Command {
 
         int pocet = scanner.nextInt();
         assert item != null; //nevim co to dela, ale Idea mi to sem dala kvuli moznemu null pointeru
-        if (pocet * item.getCena() > hrac.getInventar().getPenize()) {
+        if (pocet * 100 > hrac.getInventar().getPenize()) { //cena kontrabandu je pro nakup pouze 100
             return "Nemáte dostatek peněz";
         }
 
