@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Jdi extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
         return "";
     }
 

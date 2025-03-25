@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Koupit extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
         ItemFactory itemFactory = new ItemFactory();
 
         System.out.println("Co chcete koupit?");

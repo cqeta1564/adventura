@@ -78,7 +78,8 @@ public class Konzole {
         String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
         if (mapa.containsKey(slova[0])) {
             System.out.print("> ");
-            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost, this.sc, this.observable));
+            //                        prikaz            hrac     , aktualni mistnost   , scanner, info pro satnare, predmet na kradez/prodani/mnozstvi pri koupi
+            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost, this.sc, this.observable, slova[1]));
             try {
                 currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1], this.observable);
             } catch (Exception e) {

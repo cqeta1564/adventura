@@ -9,7 +9,7 @@ import java.util.Scanner;
 // TODO: Srovnat diakritiku
 public class Napoveda extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
         switch (currentMistnost.getName()){
             case "venku":
                 return "Jsi venku. Můžeš jít do skolt nebo za skolu.";

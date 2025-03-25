@@ -15,7 +15,7 @@ public abstract class Command {
      * Spustí příkaz.
      * @return Výstup příkazu
      */
-    public abstract String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable);
+    public abstract String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo);
 
     /**
      * Přesune hráče do jiné místnosti.

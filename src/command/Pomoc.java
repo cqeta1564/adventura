@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Pomoc extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable) {
+    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
         return """
                 Dostupné příkazy:
                 jdi <místnost> - přesune hráče do zadané místnosti
