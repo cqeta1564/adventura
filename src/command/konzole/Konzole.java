@@ -61,6 +61,7 @@ public class Konzole {
             while (!exit) {
                 provedPrikaz();
             }
+            this.sc.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
