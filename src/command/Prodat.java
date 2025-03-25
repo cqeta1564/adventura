@@ -62,8 +62,6 @@ public class Prodat extends Command {
             default:
                 return "Nejsi v místnosti, kde můžes prodávat.";
         }
-
-        return "Tohle nikdy neuvidíš :)";
     }
 
     @Override
