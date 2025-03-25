@@ -22,6 +22,7 @@ public class Koupit extends Command {
         System.out.println("Kolik chcete koupit kontrabandu?");
 
         int pocet = scanner.nextInt();
+        assert item != null; //nevim co to dela, ale Idea mi to sem dala kvuli moznemu null pointeru
         if (pocet * item.getCena() > hrac.getInventar().getPenize()) {
             return "Nemáte dostatek peněz";
         }
