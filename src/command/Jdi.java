@@ -1,13 +1,17 @@
 package command;
 
 import observer.Observable;
-import observer.Observer;
 import player.Hrac;
 import singleton.Mistnost;
 
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Příkaz pro pohyb hráče do jiné místnosti.
+ *
+ * Tento příkaz umožňuje hráči se přesunout mezi místnostmi v herním světě.
+ */
 public class Jdi extends Command {
     @Override
     public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {

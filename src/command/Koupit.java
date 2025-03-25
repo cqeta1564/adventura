@@ -9,6 +9,10 @@ import player.*;
 
 import java.util.Scanner;
 
+/**
+ * Příkaz pro nákup kontrabandu.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Koupit extends Command {
     @Override
     public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {

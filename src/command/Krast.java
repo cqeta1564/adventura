@@ -9,6 +9,10 @@ import singleton.Mistnost;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Příkaz pro kradení předmětů z místnosti.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Krast extends Command {
 
     private static final Random random = new Random();

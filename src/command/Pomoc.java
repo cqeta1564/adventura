@@ -7,7 +7,8 @@ import singleton.Mistnost;
 import java.util.Scanner;
 
 /**
- * Příkaz zobrazující dostupné příkazy ve hře.
+ * Příkaz pro zobrazení nápovědy a seznamu dostupných příkazů.
+ * Třída dědí od třídy {@link Command}.
  */
 public class Pomoc extends Command {
     @Override

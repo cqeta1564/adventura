@@ -13,6 +13,9 @@ import java.util.Scanner;
 
 /**
  * Třída zpracovávající vstup uživatele a provádějící příkazy.
+ *
+ * Tato třída spravuje uživatelský vstup a vykonává příkazy ve hře. Také spravuje
+ * pohyb hráče mezi místnostmi a interakci s prostředím.
  */
 public class Konzole {
     private Scanner sc = new Scanner(System.in);
@@ -24,6 +27,9 @@ public class Konzole {
     public Hrac hrac;
     private Observable observable;
 
+    /**
+     * Inicializuje mapu příkazů, které může uživatel zadat.
+     */
     private void inicializace() {
         mapa = new HashMap<>();
         mapa.put("jdi", new Jdi());
@@ -39,6 +45,7 @@ public class Konzole {
 
     /**
      * Spustí konzoli a čeká na vstup uživatele.
+     * Hráč zadává příkazy, které jsou následně zpracovávány a vykonávány.
      */
     public void start() {
         inicializace();
@@ -67,6 +74,9 @@ public class Konzole {
         }
     }
 
+    /**
+     * Zpracuje jeden příkaz zadaný uživatelem a vykoná ho.
+     */
     private void provedPrikaz() {
         System.out.print(">");
         String prikaz = sc.nextLine();
@@ -92,6 +102,11 @@ public class Konzole {
         }
     }
 
+    /**
+     * Uloží provedený příkaz do souboru historie příkazů.
+     *
+     * @param prikaz Příkaz, který byl proveden
+     */
     private void ulozPrikaz(String prikaz) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(souborPrikazu, true))) {
             bw.write(prikaz);
@@ -101,6 +116,9 @@ public class Konzole {
         }
     }
 
+    /**
+     * Resetuje soubor historie příkazů, tím že ho přepíše prázdným souborem.
+     */
     private void resetSouboruProPrikazy() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(souborPrikazu, false))) {
         } catch (Exception e) {
