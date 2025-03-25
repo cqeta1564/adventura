@@ -1,6 +1,7 @@
 package player;
 
 import item.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class Inventar {
         }
     }
 
-    public Item getItem(int index){
+    public Item getItem(int index) {
         return items.get(index);
     }
 
@@ -37,11 +38,11 @@ public class Inventar {
         return sb.toString();
     }
 
-    public int getSize(){
+    public int getSize() {
         return items.size();
     }
 
-    public int pocetItemu(String nazev){
+    public int pocetItemu(String nazev) {
         int pocet = 0;
         for (int i = 0; i < this.items.size(); i++) {
             if (this.items.get(i).getNazev().equals(nazev)) {

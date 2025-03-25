@@ -19,6 +19,7 @@ public class Svet {
 
     /**
      * Vrací instanci světa (singleton).
+     *
      * @return Instance světa
      */
     public static Svet getInstance() {
@@ -30,6 +31,7 @@ public class Svet {
 
     /**
      * Přidá místnost do světa.
+     *
      * @param mistnost Instance místnosti
      */
     public void addRoom(Mistnost mistnost) {
@@ -38,6 +40,7 @@ public class Svet {
 
     /**
      * Vrátí místnost podle názvu.
+     *
      * @param name Název místnosti
      * @return Instance místnosti nebo null, pokud neexistuje
      */

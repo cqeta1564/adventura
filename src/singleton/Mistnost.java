@@ -12,6 +12,7 @@ public class Mistnost {
 
     /**
      * Vytvoří novou místnost se zadaným názvem.
+     *
      * @param name Název místnosti
      */
     public Mistnost(String name) {
@@ -21,6 +22,7 @@ public class Mistnost {
 
     /**
      * Vrátí název místnosti.
+     *
      * @return Název místnosti
      */
     public String getName() {
@@ -29,6 +31,7 @@ public class Mistnost {
 
     /**
      * Přidá sousední místnost.
+     *
      * @param roomName Název sousední místnosti
      * @param mistnost Instance sousední místnosti
      */
@@ -38,6 +41,7 @@ public class Mistnost {
 
     /**
      * Vrátí sousední místnost podle názvu.
+     *
      * @param roomName Název sousední místnosti
      * @return Instance sousední místnosti nebo null, pokud neexistuje
      */
@@ -47,6 +51,7 @@ public class Mistnost {
 
     /**
      * Vrátí mapu sousedních místností.
+     *
      * @return Mapa sousedních místností
      */
     public Map<String, Mistnost> getNeighbors() {

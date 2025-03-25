@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Napoveda extends Command {
     @Override
     public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
-        switch (currentMistnost.getName()){
+        switch (currentMistnost.getName()) {
             case "venku":
                 return "Jsi venku. Můžeš jít do skolt nebo za skolu.";
             case "chodba":
