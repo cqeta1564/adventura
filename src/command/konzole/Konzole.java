@@ -49,12 +49,12 @@ public class Konzole {
         this.currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
         //Konec kodu pro ovladani sveta ------------------------------------------
 
+        this.hrac = new Hrac();
+
         //Zacatek testovaciho kodu pro satnare -----------------------------------
         this.observable = new Observable();
-        this.observable.addObserver(new Satnar());
+        this.observable.addObserver(new Satnar(this.hrac));
         //Konec testovaciho kodu pro satnare -------------------------------------
-
-        this.hrac = new Hrac();
 
         try { //Projistotu try-catch, ale nemel by byt za potrebi
             resetSouboruProPrikazy();

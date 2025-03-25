@@ -53,7 +53,9 @@ public class Inventar {
     }
 
     //TODO: Dopsat metodu pro kontrolu kontrabandu v inventari a jeho nasledne mazani, popripade prida quest na navstevu reditelny
-    public void zkontrolovatInventar() {
+    public boolean zkontrolovatInventar() {
+        System.out.println("Probíhá kontrola inventáře...");
+        return false;
 
     }
 
