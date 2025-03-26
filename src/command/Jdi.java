@@ -1,42 +1,54 @@
 package command;
 
 import observer.Observable;
-import observer.Observer;
-import player.Hrac;
 import singleton.Mistnost;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Jdi extends Command {
+
+    Mistnost currentMistnost;
+    Observable observable;
+    String nextMistnostName;
+
+    public Jdi(Mistnost mistnost, Observable observable) {
+        this.currentMistnost = mistnost;
+        this.observable = observable;
+        this.nextMistnostName = "";
+    }
+
+
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
-        return "";
+    public String execute() {
+        System.out.print("Posunuli jste se z " + currentMistnost.getName());
+
+        Mistnost nextMistnost = this.currentMistnost.getNeighbor(this.nextMistnostName);
+        boolean notifyObservers = false; //Pro jistotu vytvarim uz tady, at si s tim garbage collector poradi
+        if (nextMistnost != null) {
+            //TODO: Otestovat tento if, protoze si myslim, ze nebude fungovat tak, jak chci
+            if (Objects.equals(this.currentMistnost.getName(), "venku") && Objects.equals(nextMistnost.getName(), "chodba")) {
+                notifyObservers = false;
+            } else if (Objects.equals(nextMistnost.getName(), "chodba")) {
+                notifyObservers = true;
+            }
+            this.currentMistnost = nextMistnost;
+            System.out.println(" do " + this.currentMistnost.getName());
+            if (notifyObservers) {
+                this.observable.notifyObservers("chodba");
+            }
+            return " do " + this.currentMistnost.getName();
+        } else {
+            return "Tato místnost neexistuje nebo tam nemůžete jít.";
+        }
+    }
+
+    public String getNextMistnostName() {
+        return nextMistnostName;
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) { //Zde se bude provadet pohyb
-            System.out.print("Posunuli jste se z " + currentMistnost.getName());
-
-            Mistnost nextMistnost = currentMistnost.getNeighbor(nextMistnostName);
-            boolean notifyObservers = false; //Pro jistotu vytvarim uz tady, at si s tim garbage collector poradi
-            if (nextMistnost != null) {
-                //TODO: Otestovat tento if, protoze si myslim, ze nebude fungovat tak, jak chci
-                if (Objects.equals(currentMistnost.getName(), "venku") && Objects.equals(nextMistnost.getName(), "chodba")) {
-                    notifyObservers = false;
-                } else if (Objects.equals(nextMistnost.getName(), "chodba")) {
-                    notifyObservers = true;
-                }
-                currentMistnost = nextMistnost;
-                System.out.println(" do " + currentMistnost.getName());
-                if (notifyObservers) {
-                    observable.notifyObservers("chodba");
-                }
-                return currentMistnost;
-            } else {
-                System.out.println("Tato místnost neexistuje nebo tam nemůžete jít.");
-            }
-            return currentMistnost;
+    public void setter(String nextMistnostName) {
+        this.nextMistnostName = nextMistnostName;
     }
 
     @Override

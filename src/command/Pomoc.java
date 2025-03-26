@@ -1,17 +1,11 @@
 package command;
 
-import observer.Observable;
-import player.Hrac;
-import singleton.Mistnost;
-
-import java.util.Scanner;
-
 /**
  * Příkaz zobrazující dostupné příkazy ve hře.
  */
 public class Pomoc extends Command {
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
+    public String execute() {
         return """
                 Dostupné příkazy:
                 jdi <místnost> - přesune hráče do zadané místnosti
@@ -27,12 +21,12 @@ public class Pomoc extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
-        return currentMistnost;
+    public boolean exit() {
+        return false;
     }
 
     @Override
-    public boolean exit() {
-        return false;
+    public void setter(String argument) {
+
     }
 }

@@ -1,17 +1,26 @@
 package command;
 
-
 import item.Item;
 import item.ItemFactory;
-import observer.Observable;
 import singleton.Mistnost;
 import player.*;
 
 import java.util.Scanner;
 
 public class Koupit extends Command {
+
+    private Mistnost currentMistnost;
+    private Scanner scanner;
+    private Hrac hrac;
+
+    public Koupit(Mistnost currentMistnost, Scanner scanner, Hrac hrac) {
+        this.currentMistnost = currentMistnost;
+        this.scanner = scanner;
+        this.hrac = hrac;
+    }
+
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
+    public String execute() {
 
         Item item = ItemFactory.createItem("kontraband");
 
@@ -36,12 +45,12 @@ public class Koupit extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
-        return currentMistnost;
+    public boolean exit() {
+        return false;
     }
 
     @Override
-    public boolean exit() {
-        return false;
+    public void setter(String argument) {
+
     }
 }

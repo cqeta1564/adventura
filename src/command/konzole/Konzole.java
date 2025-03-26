@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.text.Normalizer;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,7 @@ import java.util.Scanner;
  */
 public class Konzole {
     private Scanner sc = new Scanner(System.in);
+    private Random random = new Random();
     private boolean exit = false;
     private HashMap<String, Command> mapa;
     public static String souborPrikazu = "res/historiePrikazu.txt";
@@ -26,23 +28,21 @@ public class Konzole {
 
     private void inicializace() {
         mapa = new HashMap<>();
-        mapa.put("jdi", new Jdi());
+        mapa.put("jdi", new Jdi(currentMistnost, observable));
         mapa.put("konec", new Konec());
-        mapa.put("koupit", new Koupit());
-        mapa.put("krast", new Krast());
+        mapa.put("koupit", new Koupit(currentMistnost, sc, hrac));
+        mapa.put("krast", new Krast(random, currentMistnost, sc, observable, hrac));
         mapa.put("mluv", new Mluv());
-        mapa.put("napoveda", new Napoveda());
+        mapa.put("napoveda", new Napoveda(currentMistnost));
         mapa.put("pomoc", new Pomoc());
-        mapa.put("prodat", new Prodat());
-        mapa.put("progress", new Progress());
+        mapa.put("prodat", new Prodat(currentMistnost, hrac, sc));
+        mapa.put("progress", new Progress(hrac));
     }
 
     /**
      * Spustí konzoli a čeká na vstup uživatele.
      */
     public void start() {
-        inicializace();
-
         //Zacatek kodu pro ovladani sveta ----------------------------------------
         SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
         this.svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
@@ -55,6 +55,8 @@ public class Konzole {
         this.observable = new Observable();
         this.observable.addObserver(new Satnar(this.hrac));
         //Konec testovaciho kodu pro satnare -------------------------------------
+
+        inicializace();
 
         try { //Projistotu try-catch, ale nemel by byt za potrebi
             resetSouboruProPrikazy();
@@ -78,10 +80,10 @@ public class Konzole {
         String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
         if (mapa.containsKey(slova[0])) {
             System.out.print("> ");
-            //                        prikaz            hrac     , aktualni mistnost   , scanner, info pro satnare, predmet na kradez/prodani/mnozstvi pri koupi
-            System.out.print(mapa.get(slova[0]).execute(this.hrac, this.currentMistnost, this.sc, this.observable, slova[1]));
+
             try {
-                currentMistnost = mapa.get(slova[0]).move(currentMistnost, slova[1], this.observable);
+                mapa.get("jdi").setter(slova[1]);
+                System.out.print(mapa.get(slova[0]).execute());
             } catch (Exception e) {
                 System.out.println();
                 System.out.println("> Chybne zadany prikaz");
