@@ -1,16 +1,24 @@
 package command;
 
-import item.Item;
-import item.ItemFactory;
-import observer.Observable;
 import player.Hrac;
 import singleton.Mistnost;
 
 import java.util.Scanner;
 
 public class Prodat extends Command {
+
+    private Mistnost currentMistnost;
+    private Hrac hrac;
+    private Scanner scanner;
+
+    public Prodat(Mistnost currentMistnost, Hrac hrac, Scanner scanner) {
+        this.currentMistnost = currentMistnost;
+        this.hrac = hrac;
+        this.scanner = scanner;
+    }
+
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
+    public String execute() {
         int pocet = 0;
         switch (currentMistnost.getName()) {
             case "za skolou":
@@ -65,12 +73,12 @@ public class Prodat extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
-        return currentMistnost;
+    public boolean exit() {
+        return false;
     }
 
     @Override
-    public boolean exit() {
-        return false;
+    public void setter(String argument) {
+
     }
 }

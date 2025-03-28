@@ -1,15 +1,18 @@
 package command;
 
-import observer.Observable;
-import player.Hrac;
 import singleton.Mistnost;
-
-import java.util.Scanner;
 
 // TODO: Srovnat diakritiku
 public class Napoveda extends Command {
+
+    private Mistnost currentMistnost;
+
+    public Napoveda(Mistnost currentMistnost) {
+        this.currentMistnost = currentMistnost;
+    }
+
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
+    public String execute() {
         switch (currentMistnost.getName()) {
             case "venku":
                 return "Jsi venku. Můžeš jít do skolt nebo za skolu.";
@@ -37,12 +40,12 @@ public class Napoveda extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
-        return currentMistnost;
+    public boolean exit() {
+        return false;
     }
 
     @Override
-    public boolean exit() {
-        return false;
+    public void setter(String argument) {
+
     }
 }

@@ -15,11 +15,23 @@ import java.util.Scanner;
  */
 public class Krast extends Command {
 
-    private static final Random random = new Random();
+    private Random random;
+    private Mistnost currentMistnost;
+    private Scanner scanner;
+    private Observable observable;
+    private Hrac hrac;
+
+    public Krast(Random random, Mistnost currentMistnost, Scanner scanner, Observable observable, Hrac hrac) {
+        this.random = random;
+        this.currentMistnost = currentMistnost;
+        this.scanner = scanner;
+        this.observable = observable;
+        this.hrac = hrac;
+    }
 
     //TODO: Opravit chybu, kdy muze hrac ukrast veci z jine mistnosti
     @Override
-    public String execute(Hrac hrac, Mistnost currentMistnost, Scanner scanner, Observable observable, String druheSlovo) {
+    public String execute() {
 
         // Kontrola mistnosti
         if (!(currentMistnost.getName().equals("pocitacova ucebna") || currentMistnost.getName().equals("fyzikalni ucebna"))) {
@@ -45,12 +57,12 @@ public class Krast extends Command {
     }
 
     @Override
-    public Mistnost move(Mistnost currentMistnost, String nextMistnostName, Observable observable) {
-        return currentMistnost;
+    public boolean exit() {
+        return false;
     }
 
     @Override
-    public boolean exit() {
-        return false;
+    public void setter(String argument) {
+
     }
 }
