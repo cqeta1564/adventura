@@ -127,4 +127,77 @@ public class Konzole {
             System.out.println(e.getMessage());
         }
     }
+
+    // =========================Settery a gettery pro UNIT testy========================================
+    public Scanner getSc() {
+        return sc;
+    }
+
+    public void setSc(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    public boolean isExit() {
+        return exit;
+    }
+
+    public void setExit(boolean exit) {
+        this.exit = exit;
+    }
+
+    public HashMap<String, Command> getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(HashMap<String, Command> mapa) {
+        this.mapa = mapa;
+    }
+
+    public static String getSouborPrikazu() {
+        return souborPrikazu;
+    }
+
+    public static void setSouborPrikazu(String souborPrikazu) {
+        Konzole.souborPrikazu = souborPrikazu;
+    }
+
+    public Svet getSvet() {
+        return svet;
+    }
+
+    public void setSvet(Svet svet) {
+        this.svet = svet;
+    }
+
+    public Mistnost getCurrentMistnost() {
+        return currentMistnost;
+    }
+
+    public void setCurrentMistnost(Mistnost currentMistnost) {
+        this.currentMistnost = currentMistnost;
+    }
+
+    public Hrac getHrac() {
+        return hrac;
+    }
+
+    public void setHrac(Hrac hrac) {
+        this.hrac = hrac;
+    }
+
+    public Observable getObservable() {
+        return observable;
+    }
+
+    public void setObservable(Observable observable) {
+        this.observable = observable;
+    }
 }
