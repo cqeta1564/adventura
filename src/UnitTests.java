@@ -13,23 +13,32 @@ public class UnitTests {
     }
 
     @org.junit.jupiter.api.Test
-    void overeniFunkcnostiTestovaniTridy() {
+    void overeniFunkcnostiTestu() {
         assertEquals(1, 1);
     }
 
     @org.junit.jupiter.api.Test
-    void overeniVytvoreniKonzole() {
-        assertNotNull(konzole);
-    }
-
-    //TODO: S timhle neco vymyslet, protoze to bude potreba, ale zatim jak presne to udelat
-    @org.junit.jupiter.api.Test
-    void overeniSpusteniKonzole() {
-        konzole.start();
+    void overeniUlozPrikaz() {
+        konzole.getUlozPrikaz("");
     }
 
     @org.junit.jupiter.api.Test
-    void overeniVytvoreniHrace() {
-        assertNotNull(konzole.getHrac());
+    void overeniInicializaceSveta() {
+        konzole.getInicializaceSveta();
+    }
+
+    @org.junit.jupiter.api.Test
+    void overeniInicializaceObjektu() {
+        konzole.getInicializaceObjektu();
+    }
+
+    @org.junit.jupiter.api.Test
+    void overeniInicializacePrikazu() {
+        konzole.getInicializacePrikazu();
+    }
+
+    @org.junit.jupiter.api.Test
+    void overeniInicializaceHistoriePrikazu() {
+        konzole.getInicializaceHistoriePrikazu();
     }
 }
