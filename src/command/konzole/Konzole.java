@@ -203,6 +203,18 @@ public class Konzole {
         return inicializaceHistoriePrikazu();
     }
 
+    public String getZiskatText() {
+        return ziskatText();
+    }
+
+    public String getNormalizovatText(String prikaz) {
+        return normalizovatText(prikaz);
+    }
+
+    public String[] getRozdelitText(String prikaz) {
+        return rozdelitText(prikaz);
+    }
+
     public Scanner getSc() {
         return sc;
     }
