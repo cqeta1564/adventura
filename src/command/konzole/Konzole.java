@@ -31,6 +31,8 @@ public class Konzole {
 
     /**
      * Inicializuje mapu příkazů, které může uživatel zadat.
+     *
+     * @return true, pokud byla inicializace úspěšná, jinak false
      */
     private boolean inicializacePrikazu() {
         try {
@@ -50,6 +52,11 @@ public class Konzole {
         return true;
     }
 
+    /**
+     * Inicializuje objekty potřebné pro běh hry.
+     *
+     * @return true, pokud byla inicializace úspěšná, jinak false
+     */
     private boolean inicializaceObjektu() {
         try {
             this.hrac = new Hrac();
@@ -65,6 +72,11 @@ public class Konzole {
         return true;
     }
 
+    /**
+     * Inicializuje svět hry.
+     *
+     * @return true, pokud byla inicializace úspěšná, jinak false
+     */
     private boolean inicializaceSveta() {
         try {
             SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
@@ -76,6 +88,11 @@ public class Konzole {
         return true;
     }
 
+    /**
+     * Resetuje historii příkazů.
+     *
+     * @return true, pokud byl reset úspěšný, jinak false
+     */
     private boolean inicializaceHistoriePrikazu() {
         try {
             resetSouboruProPrikazy();
@@ -109,10 +126,21 @@ public class Konzole {
         this.sc.close();
     }
 
+    /**
+     * Načte uživatelský vstup z konzole.
+     *
+     * @return řetězec zadaný uživatelem
+     */
     private String ziskatText() {
         return sc.nextLine();
     }
 
+    /**
+     * Normalizuje text - odstraní diakritiku a převede na malá písmena.
+     *
+     * @param prikaz vstupní text
+     * @return normalizovaný text
+     */
     private String normalizovatText(String prikaz) {
         prikaz = prikaz.trim(); //Remove leading and trailing whitespaces
         prikaz = prikaz.toLowerCase(); //Convert to lowercase
@@ -121,6 +149,12 @@ public class Konzole {
         return prikaz;
     }
 
+    /**
+     * Rozdělí text na jednotlivá slova.
+     *
+     * @param prikaz vstupní text
+     * @return pole slov
+     */
     private String[] rozdelitText(String prikaz) {
         return prikaz.split(" "); //Rozkladani prikazu na samostatna slova
     }

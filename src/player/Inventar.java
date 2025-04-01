@@ -6,14 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Třída Inventar reprezentuje hráčův inventář s předměty a penězi.
+ */
 public class Inventar {
     private List<Item> items = new ArrayList<>();
     private int penize = 100;
 
+    /**
+     * Přidá předmět do inventáře.
+     *
+     * @param item Předmět k přidání.
+     */
     public void addItem(Item item) {
         items.add(item);
     }
 
+    /**
+     * Odstraní z inventáře určitý počet předmětů podle názvu.
+     *
+     * @param item  Název předmětu k odstranění.
+     * @param pocet Počet kusů k odstranění.
+     */
     public void removeItem(String item, int pocet) {
         for (int i = 0; i < pocet; i++) {
             for (int j = 0; j < items.size(); j++) {
@@ -25,11 +39,22 @@ public class Inventar {
         }
     }
 
+    /**
+     * Vrátí položku na daném indexu v inventáři.
+     *
+     * @param index Index položky.
+     * @return Položka v inventáři.
+     */
     public Item getItem(int index) {
         return items.get(index);
     }
 
     //TODO: Udelat smysluplnejsi vypis
+    /**
+     * Vrátí textovou reprezentaci předmětů v inventáři.
+     *
+     * @return Seznam předmětů jako řetězec.
+     */
     public String showItems() {
         StringBuilder sb = new StringBuilder();
         for (Item item : items) {
@@ -52,6 +77,11 @@ public class Inventar {
         return pocet;
     }
 
+    /**
+     * Zkontroluje inventář a vyprázdní ho, pokud obsahuje zakázané předměty.
+     *
+     * @return `true`, pokud inventář obsahoval zakázané předměty.
+     */
     public boolean zkontrolovatInventar() {
         System.out.println("Probíhá kontrola inventáře...");
         if (!this.items.isEmpty()){
@@ -65,6 +95,11 @@ public class Inventar {
         return penize;
     }
 
+    /**
+     * Přidá hráči peníze.
+     *
+     * @param penize Počet přidaných peněz.
+     */
     public void addPenize(int penize) {
         this.penize = penize;
     }

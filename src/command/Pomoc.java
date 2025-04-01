@@ -1,7 +1,7 @@
 package command;
 
 /**
- * Příkaz pro zobrazení nápovědy a seznamu dostupných příkazů.
+ * Příkaz pro zobrazení seznamu dostupných příkazů.
  * Třída dědí od třídy {@link Command}.
  */
 public class Pomoc extends Command {

@@ -2,6 +2,10 @@ package command;
 
 import player.Hrac;
 
+/**
+ * Příkaz pro kontrolu aktuálního progressu ve hře.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Progress extends Command {
 
     private Hrac hrac;

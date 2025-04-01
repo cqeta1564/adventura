@@ -1,7 +1,5 @@
 package observer;
 
-import player.Hrac;
-
 import java.util.ArrayList;
 import java.util.List;
 

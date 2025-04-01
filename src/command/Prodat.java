@@ -5,6 +5,10 @@ import singleton.Mistnost;
 
 import java.util.Scanner;
 
+/**
+ * Příkaz pro prodej kontrabandu a kradeného vybavení.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Prodat extends Command {
 
     private Mistnost currentMistnost;

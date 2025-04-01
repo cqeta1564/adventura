@@ -3,6 +3,10 @@ package command;
 import singleton.Mistnost;
 
 // TODO: Srovnat diakritiku
+/**
+ * Příkaz pro vypsání nápovědy k aktuální situaci.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Napoveda extends Command {
 
     private Mistnost currentMistnost;

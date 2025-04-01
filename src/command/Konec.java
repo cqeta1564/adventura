@@ -1,5 +1,9 @@
 package command;
 
+/**
+ * Příkaz pro ukončení hry.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Konec extends Command {
     @Override
     public String execute() {

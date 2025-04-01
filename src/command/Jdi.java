@@ -5,6 +5,10 @@ import singleton.Mistnost;
 
 import java.util.Objects;
 
+/**
+ * Příkaz pro pohyb po mapě.
+ * Třída dědí od třídy {@link Command}.
+ */
 public class Jdi extends Command {
 
     Mistnost currentMistnost;
