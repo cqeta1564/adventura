@@ -9,7 +9,6 @@ public class UnitTests {
     @org.junit.jupiter.api.BeforeEach
     void init() {
         this.konzole = new Konzole();
-
     }
 
     @org.junit.jupiter.api.Test
