@@ -14,13 +14,13 @@ import java.util.Scanner;
 
 /**
  * Třída zpracovávající vstup uživatele a provádějící příkazy.
- *
+ * <p>
  * Tato třída spravuje uživatelský vstup a vykonává příkazy ve hře. Také spravuje
  * pohyb hráče mezi místnostmi a interakci s prostředím.
  */
 public class Konzole {
-    private Scanner sc = new Scanner(System.in);
-    private Random random = new Random();
+    private Scanner sc;
+    private Random random;
     private boolean exit = false;
     private HashMap<String, Command> mapa;
     public static String souborPrikazu = "res/historiePrikazu.txt";
@@ -32,17 +32,59 @@ public class Konzole {
     /**
      * Inicializuje mapu příkazů, které může uživatel zadat.
      */
-    private void inicializace() {
-        mapa = new HashMap<>();
-        mapa.put("jdi", new Jdi(currentMistnost, observable));
-        mapa.put("konec", new Konec());
-        mapa.put("koupit", new Koupit(currentMistnost, sc, hrac));
-        mapa.put("krast", new Krast(random, currentMistnost, sc, observable, hrac));
-        mapa.put("mluv", new Mluv());
-        mapa.put("napoveda", new Napoveda(currentMistnost));
-        mapa.put("pomoc", new Pomoc());
-        mapa.put("prodat", new Prodat(currentMistnost, hrac, sc));
-        mapa.put("progress", new Progress(hrac));
+    private boolean inicializacePrikazu() {
+        try {
+            mapa = new HashMap<>();
+            mapa.put("jdi", new Jdi(currentMistnost, observable));
+            mapa.put("konec", new Konec());
+            mapa.put("koupit", new Koupit(currentMistnost, sc, hrac));
+            mapa.put("krast", new Krast(random, currentMistnost, sc, observable, hrac));
+            mapa.put("mluv", new Mluv());
+            mapa.put("napoveda", new Napoveda(currentMistnost));
+            mapa.put("pomoc", new Pomoc());
+            mapa.put("prodat", new Prodat(currentMistnost, hrac, sc));
+            mapa.put("progress", new Progress(hrac));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean inicializaceObjektu() {
+        try {
+            this.hrac = new Hrac();
+
+            this.observable = new Observable();
+            this.observable.addObserver(new Satnar(this.hrac));
+
+            this.sc = new Scanner(System.in);
+            this.random = new Random();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean inicializaceSveta() {
+        try {
+            SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
+            this.svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
+            this.currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean inicializaceHistoriePrikazu() {
+        try {
+            resetSouboruProPrikazy();
+        } catch (Exception e) {
+            System.out.println("> Nebylo možné resetovat historii příkazů. Následující chybu prosím hlašte správci projektu: ");
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -50,44 +92,52 @@ public class Konzole {
      * Hráč zadává příkazy, které jsou následně zpracovávány a vykonávány.
      */
     public void start() {
-        //Zacatek kodu pro ovladani sveta ----------------------------------------
-        SvetLoader.loadWorld(); //Za pomoci SvetLoaderu nacteme svet
-        this.svet = Svet.getInstance(); //Vpiseme nacteny svet do Svetu
-        this.currentMistnost = svet.getRoom("venku"); //Zacneme ve mistnosti "venku"
-        //Konec kodu pro ovladani sveta ------------------------------------------
-
-        this.hrac = new Hrac();
-
-        //Zacatek testovaciho kodu pro satnare -----------------------------------
-        this.observable = new Observable();
-        this.observable.addObserver(new Satnar(this.hrac));
-        //Konec testovaciho kodu pro satnare -------------------------------------
-
-        inicializace();
+        inicializaceSveta();
+        inicializaceObjektu();
+        inicializacePrikazu();
+        inicializaceHistoriePrikazu();
 
         try { //Projistotu try-catch, ale nemel by byt za potrebi
-            resetSouboruProPrikazy();
             while (!exit) {
                 provedPrikaz();
             }
-            this.sc.close();
         } catch (Exception e) {
+            System.out.println("> Nastala neočekávaná chyba. Prosím restartujte program a následující chybu hlašte správci projektu: ");
             System.out.println(e.getMessage());
         }
+
+        this.sc.close();
+    }
+
+    private String ziskatText() {
+        return sc.nextLine();
+    }
+
+    private String normalizovatText(String prikaz) {
+        prikaz = prikaz.trim(); //Remove leading and trailing whitespaces
+        prikaz = prikaz.toLowerCase(); //Convert to lowercase
+        prikaz = Normalizer.normalize(prikaz, Normalizer.Form.NFD); //Remove diacritics
+        prikaz = prikaz.replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); //Remove diacritics
+        return prikaz;
+    }
+
+    private String[] rozdelitText(String prikaz) {
+        return prikaz.split(" "); //Rozkladani prikazu na samostatna slova
     }
 
     /**
      * Zpracuje jeden příkaz zadaný uživatelem a vykoná ho.
      */
     private void provedPrikaz() {
-        System.out.print(">");
-        String prikaz = sc.nextLine();
-        prikaz = prikaz.trim(); //Remove leading and trailing whitespaces
-        prikaz = prikaz.toLowerCase(); //Convert to lowercase
-        prikaz = Normalizer.normalize(prikaz, Normalizer.Form.NFD); //Remove diacritics
-        prikaz = prikaz.replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); //Remove diacritics
+        System.out.print("> ");
+        String prikaz = ziskatText();
+
+        prikaz = normalizovatText(prikaz);
+
         ulozPrikaz(prikaz);
-        String[] slova = prikaz.split(" "); //Rozkladani prikazu na samostatna slova
+
+        String[] slova = rozdelitText(prikaz);
+
         if (mapa.containsKey(slova[0])) {
             System.out.print("> ");
 
@@ -96,11 +146,11 @@ public class Konzole {
                 System.out.print(mapa.get(slova[0]).execute());
             } catch (Exception e) {
                 System.out.println();
-                System.out.println("> Chybne zadany prikaz");
+                System.out.println("> Chybně zadaný příkaz");
             }
             exit = mapa.get(slova[0]).exit(); //Resime prikaz ukonceni
         } else {
-            System.out.println("> Nedefinovany prikaz");
+            System.out.println("> Nedefinovaný příkaz");
         }
     }
 
@@ -109,13 +159,16 @@ public class Konzole {
      *
      * @param prikaz Příkaz, který byl proveden
      */
-    private void ulozPrikaz(String prikaz) {
+    private boolean ulozPrikaz(String prikaz) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(souborPrikazu, true))) {
             bw.write(prikaz);
             bw.newLine();
         } catch (Exception e) {
+            System.out.println("> Nebylo možné uložit příkaz do souboru. Následující chybu prosím hlašte správci projektu: ");
             System.out.println(e.getMessage());
+            return false;
         }
+        return true;
     }
 
     /**
@@ -124,11 +177,32 @@ public class Konzole {
     private void resetSouboruProPrikazy() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(souborPrikazu, false))) {
         } catch (Exception e) {
+            System.out.println("> Nebylo možné resetovat historii příkazů. Následující chybu prosím hlašte správci projektu: ");
             System.out.println(e.getMessage());
         }
     }
 
     // =========================Settery a gettery pro UNIT testy========================================
+    public boolean getUlozPrikaz(String prikaz) {
+        return ulozPrikaz(prikaz);
+    }
+
+    public boolean getInicializaceSveta() {
+        return inicializaceSveta();
+    }
+
+    public boolean getInicializaceObjektu() {
+        return inicializaceObjektu();
+    }
+
+    public boolean getInicializacePrikazu() {
+        return inicializacePrikazu();
+    }
+
+    public boolean getInicializaceHistoriePrikazu() {
+        return inicializaceHistoriePrikazu();
+    }
+
     public Scanner getSc() {
         return sc;
     }
@@ -186,7 +260,7 @@ public class Konzole {
     }
 
     public Hrac getHrac() {
-        return hrac;
+        return this.hrac;
     }
 
     public void setHrac(Hrac hrac) {
