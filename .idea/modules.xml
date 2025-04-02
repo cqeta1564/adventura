@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/adventura.iml" filepath="$PROJECT_DIR$/adventura.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tst/tst.iml" filepath="$PROJECT_DIR$/tst/tst.iml" />
     </modules>
   </component>
 </project>
